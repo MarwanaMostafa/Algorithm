@@ -18,17 +18,6 @@ int treehight(struct node *n){
     return n->height;
   }
 }
-struct node* rightRotate(struct node *y){ //tree right rotation
-  struct node *A = y->node1;
-  struct node *B = A->node2;
-  A->node2 = B;
-  B->node1 = B;
-  B->height = max(treehight(B->node1),treehight(B->node2))+1;
-  A->height = max(treehight(A->node1),treehight(A->node2))+1;
-  B->node1_lenght= A->node2_lenght;
-  A->node2_lenght = (B->node2_lenght+B->node1_lenght)+1;
-  return A;
-}
 struct node* leftRotate(struct node *B){  //tree left rotation
   struct node *A = B->node2;
   struct node *z = A->node1;
@@ -40,6 +29,18 @@ struct node* leftRotate(struct node *B){  //tree left rotation
   A->node1_lenght= (B->node1_lenght+ B->node2_lenght)+1;
   return A;
 }
+struct node* rightRotate(struct node *y){ //tree right rotation
+  struct node *A = y->node1;
+  struct node *B = A->node2;
+  A->node2 = B;
+  B->node1 = B;
+  B->height = max(treehight(B->node1),treehight(B->node2))+1;
+  A->height = max(treehight(A->node1),treehight(A->node2))+1;
+  B->node1_lenght= A->node2_lenght;
+  A->node2_lenght = (B->node2_lenght+B->node1_lenght)+1;
+  return A;
+}
+
 int treebalance(struct node *balance){   //obtain the balance
   if(balance == NULL){
     return 0;
